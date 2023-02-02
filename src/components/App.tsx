@@ -1,13 +1,14 @@
-import { useState } from 'react'
 import AppContext from '../contexts/AppContext';
+import Board from './Board';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <AppContext>
-		</AppContext>
+      <Board />
+    </AppContext>
   )
+
 }
 
 export default App
