@@ -1,5 +1,5 @@
 # board-app-react
-## :hammer: tecnologías
+## :hammer: Tecnologías
 
 Este proyecto fue desarrollado con las siguientes tecnologías:
 
