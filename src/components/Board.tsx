@@ -1,8 +1,15 @@
 import { useContext, useEffect } from 'react'
+
+import { Button } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 import styled from '@emotion/styled';
 
 import { AppContext } from '../contexts/AppContext';
+import { Statuses } from '../constants';
 
+import ConfirmDialog from './ConfirmDialog';
+import List from './List';
+import ModalFormIssue from './ModalFormIssue';
 import Search from './Search';
 
 const Container = styled.div`
@@ -42,9 +49,13 @@ const Titles = ['To Do', 'In Progress', 'Done'];
 export default () => {
   const appContext: any = useContext(AppContext);
   const {
+    isDataLoaded,
     issues,
     filteredIssues,
     isSearching,
+    isEditing,
+    isCreating,
+    isDeleting
   } = appContext.state;
 
   const data = isSearching ? filteredIssues : issues;
@@ -64,9 +75,25 @@ export default () => {
           <Title>
             Kanban Board
           </Title>
+          <Button variant="contained" color="secondary" onClick={handleOpen} disabled={!isDataLoaded}>
+            <AddIcon /> New Issue
+          </Button>
         </Header>
         <Search />
+        <Content>
+          {Statuses.map((status, index) => (
+            <List
+              key={`Board-List-${status}`}
+              title={Titles[index]}
+              completed={isDataLoaded}
+              data={data.filter((issue: { status: string; }) => issue.status === status)}
+              status={status}
+            />
+          ))}
+        </Content>
       </Container>
+      <ModalFormIssue show={isEditing || isCreating} />
+      { isDeleting && <ConfirmDialog /> }
     </>
   );
 }
