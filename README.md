@@ -4,7 +4,7 @@
 Este proyecto fue desarrollado con las siguientes tecnologías:
 
 - HTML5
-- CSS
+- SASS
 - React
 - TypeScript
 - Material-ui
